@@ -1,5 +1,5 @@
 import os
-file = open('HelloWorld1.html','w')
+file = open('HelloWorldO.html','w')
 
 str = '''
 <HTML>
@@ -13,5 +13,5 @@ str = '''
 '''
 file.write(str)
 file.close()
-os.startfile('HelloWorld1.html')
+os.startfile('HelloWorldO.html')
 
