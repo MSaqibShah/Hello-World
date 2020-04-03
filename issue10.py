@@ -1,13 +1,21 @@
-import configparser
+import paramiko
+ip = input("ENTER IP: ")
+user = input("ENTER USERNAME: ")
+passwd = input("ENTER PASSWORD: ")
 
-config = configparser.ConfigParser()
-config.read('config.ini')
-number = int(config['DEFAULT']['num'])
+client = paramiko.SSHClient()
 
-file = open('file1.txt','w')
-str = "hello world"
-size = number * 1024
-size_count = 0
-while size_count < size:
-    file.write(str)
-    size_count += len(str) 
+client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+client.connect(ip,username=user,password=passwd)
+
+remote_connection = client.invoke_shell()
+
+stdin, stdout, stderr = client.exec_command('wall Hello_world > /dev/null 2>&1')
+out = stdout.readlines()
+error = stderr.readlines()
+print(out)
+print(error)
+
+
+
+
